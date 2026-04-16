@@ -10,7 +10,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("piu");
+    
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + currentWeapon.fireRate;
 
@@ -40,5 +40,21 @@ public class WeaponSystem : MonoBehaviour
 
 
         AudioSource.PlayClipAtPoint(currentWeapon.shootSound, transform.position);
+    }
+    public void ShootAt(Vector3 targetPoint)
+    {
+        if (Time.time < nextFireTime) return;
+
+        nextFireTime = Time.time + currentWeapon.fireRate;
+
+        Vector3 direction = (targetPoint - shootPoint.position).normalized;
+
+        GameObject bullet = Instantiate(
+            currentWeapon.bulletPrefab,
+            shootPoint.position,
+            Quaternion.LookRotation(direction)
+        );
+
+        bullet.GetComponent<Bullet>().team = team;
     }
 }

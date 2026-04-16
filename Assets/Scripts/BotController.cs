@@ -7,7 +7,8 @@ public class BotController : MonoBehaviour
     public Transform target;
     public float visionRange = 15f;
     public LayerMask obstacleMask;
-
+    public float minDistance = 5f;   // muy cerca → retrocede
+    public float maxDistance = 10f;  // muy lejos → se acerca
     public WeaponSystem weapon;
 
     void Update()
@@ -16,11 +17,44 @@ public class BotController : MonoBehaviour
 
         if (target != null)
         {
-            agent.SetDestination(target.position);
+            float distance = Vector3.Distance(transform.position, target.position);
 
-            transform.LookAt(target);
+            // 🔥 MOVIMIENTO SEGÚN DISTANCIA
+            if (distance > maxDistance)
+            {
+                // 👉 acercarse
+                agent.SetDestination(target.position);
+            }
+            else if (distance < minDistance)
+            {
+                // 👉 alejarse
+                Vector3 dir = (transform.position - target.position).normalized;
+                Vector3 newPos = transform.position + dir * 5f;
 
-            weapon.Shoot();
+                agent.SetDestination(newPos);
+            }
+            else
+            {
+                // 👉 quedarse quieto
+                agent.ResetPath();
+            }
+
+            // 🔥 ROTACIÓN SUAVE (mejor que LookAt)
+            Vector3 lookDir = target.position - transform.position;
+            lookDir.y = 0;
+
+            Quaternion rot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 5f);
+
+            // 🔫 APUNTADO DEL ARMA
+            Vector3 direction = (target.position - weapon.shootPoint.position).normalized;
+            weapon.shootPoint.rotation = Quaternion.LookRotation(direction);
+
+            // 🔥 DISPARO SOLO SI ESTÁ EN RANGO
+            if (distance <= maxDistance)
+            {
+                weapon.ShootAt(target.position);
+            }
         }
     }
 

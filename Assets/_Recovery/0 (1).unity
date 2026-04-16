@@ -974,6 +974,7 @@ GameObject:
   - component: {fileID: 538348432}
   - component: {fileID: 538348438}
   - component: {fileID: 538348437}
+  - component: {fileID: 538348436}
   - component: {fileID: 538348435}
   m_Layer: 0
   m_Name: Bot_1
@@ -1101,6 +1102,21 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &538348436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538348430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1401b7e120229d54cb97c579765c39fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSystem
+  currentWeapon: {fileID: 11400000, guid: 2de20623bc3c2bd47bf01b5685eadbaf, type: 2}
+  shootPoint: {fileID: 601413202}
+  team: 0
 --- !u!114 &538348437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,9 +1149,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
-  minDistance: 5
-  maxDistance: 10
-  weapon: {fileID: 1044624181}
+  weapon: {fileID: 538348436}
 --- !u!1 &601413201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1175,7 @@ Transform:
   m_GameObject: {fileID: 601413201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.2}
+  m_LocalPosition: {x: 0, y: 1, z: 1.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1647,7 +1661,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1044624180}
-  - component: {fileID: 1044624181}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1664,28 +1677,13 @@ Transform:
   m_GameObject: {fileID: 1044624179}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.49}
+  m_LocalPosition: {x: 0.39, y: 0, z: 0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 601413202}
   m_Father: {fileID: 538348431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1044624181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1044624179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1401b7e120229d54cb97c579765c39fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponSystem
-  currentWeapon: {fileID: 11400000, guid: fa6564fe0b5e14d498cee6c15ce0a36e, type: 2}
-  shootPoint: {fileID: 601413202}
-  team: 2
 --- !u!1 &1106102043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,7 +2633,7 @@ Transform:
   m_GameObject: {fileID: 1784277414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 1.38}
+  m_LocalPosition: {x: 0, y: -0.12, z: 1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
